@@ -1,0 +1,31 @@
+drop table Guest_T;
+drop table Exhibit_T;
+drop table Visit_T;
+CREATE TABLE Guest_T (
+GID number(11,0) not null,
+Name varchar2(25) not null,
+CONSTRAINT Guest_PK PRIMARY KEY (GID)
+);
+CREATE TABLE Exhibit_T (
+EID number(11,0) not null,
+Name varchar2(25) not null,
+CONSTRAINT Exhibit_PK PRIMARY KEY (EID)
+);
+CREATE TABLE Visit_T (
+VID number(11,0) not null,
+Ticket_num char(8),
+GID number(11,0) not null,
+EID number(11,0) not null,
+CONSTRAINT Visit_PK PRIMARY KEY (VID),
+CONSTRAINT Visit_FK1 FOREIGN KEY (GID) REFERENCES Guest_T(GID),
+CONSTRAINT Visit_FK2 FOREIGN KEY (EID) REFERENCES Exhibit_T(EID)
+);
+INSERT INTO Guest_T VALUES (1, 'Mike Jones');
+INSERT INTO Guest_T VALUES (2, 'John Adams');
+INSERT INTO Exhibit_T VALUES (1, 'Mona Lisa');
+INSERT INTO Exhibit_T VALUES (2, 'Painting');
+INSERT INTO Visit_T VALUES (1,1,1,1);
+INSERT INTO Visit_T VALUES (2,2,2,2);
+SELECT * FROM Guest_T;
+SELECT * FROM Exhibit_T;
+SELECT * FROM Visit_T;
